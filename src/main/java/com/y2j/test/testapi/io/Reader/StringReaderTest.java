@@ -35,20 +35,31 @@ public class StringReaderTest
         }
     }
 
+    //mark,reset测试
     @Test
     public void test1()
     {
         try {
             StringReader sr = new StringReader("012345");
-            sr.mark(1);
             char[] c = new char[8];
-            int i = 0;
-            while((i = sr.read(c)) != -1)
+            System.out.println(sr.markSupported());
+            for(int i = 0;i < 2;i++)
             {
-                sr.mark(2);
-                sr.read(c);
+                char cc = (char)sr.read();
+                System.out.println(cc);
             }
-            System.out.println(Arrays.toString(c));
+            sr.mark(0);
+            for(int i = 0;i < 2;i++)
+            {
+                char cc = (char)sr.read();
+                System.out.println(cc);
+            }
+            sr.reset();
+            for(int i = 0;i < 2;i++)
+            {
+                char cc = (char)sr.read();
+                System.out.println(cc);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
